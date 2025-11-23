@@ -12,4 +12,5 @@ export const errorHandler = (err, req, res, next) => {
     message,
     ...(process.env.NODE_ENV === "development" && { error: err.message }),
   })
+  // Do not call next() from the error handler after sending a response.
 }

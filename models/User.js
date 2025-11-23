@@ -48,19 +48,22 @@ const userSchema = new mongoose.Schema({
   },
 })
 
-userSchema.pre("save", async function (next) {
+// Use an async pre-save hook without the `next` callback. Mongoose
+// treats async middleware as promise-based and does not provide a
+// `next` argument — calling `next()` here caused "next is not a function".
+userSchema.pre("save", async function () {
   // Skip if password is not modified
   if (!this.isModified("password")) {
-    return next()
+    return
   }
 
   try {
     const salt = await bcryptjs.genSalt(10)
     this.password = await bcryptjs.hash(this.password, salt)
-    next()
   } catch (error) {
-    // Pass error to next middleware
-    next(error)
+    // Throw error so Mongoose will reject the save promise and
+    // propagate the error to the caller (Express error handler).
+    throw error
   }
 })
 
