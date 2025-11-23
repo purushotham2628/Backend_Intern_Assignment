@@ -21,4 +21,5 @@ export const authenticate = (req, res, next) => {
       message: "Invalid or expired token",
     })
   }
+  // don't call next() here unconditionally — response has already been sent on error
 }

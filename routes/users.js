@@ -11,7 +11,8 @@ import {
   makeAdmin,
   removeAdmin,
 } from "../controllers/userController.js"
-import { validateUpdate, validate } from "../utils/validation.js"
+import { validateUpdate } from "../utils/validation.js"
+import { validate } from "../middleware/validation.js"
 
 const router = express.Router()
 
