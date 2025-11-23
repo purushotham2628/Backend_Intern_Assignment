@@ -63,21 +63,38 @@ The README below focuses on making the code layout and quick testing simple.
 
 ---
 
-## Minimal folder map
+## STRUCTURE
 
-I removed the deep tree and grouped files so the layout is easier to scan. Open files under each folder for details.
 
 ```
 .
-├─ server.js                 # App entry
-├─ config/                   # DB and other config
-├─ controllers/              # Route handlers (auth, user, post, ...)
-├─ routes/                   # Express routes -> controllers
-├─ models/                   # Mongoose models (User, Post, etc.)
-├─ middleware/               # Auth, validation, error handling
-├─ utils/                    # Small helpers & constants
-├─ public/                   # Static assets (if any)
-└─ README.md                 # You are here
+├─ server.js                # start server, mount middleware + /api
+├─ config/
+│  └─ database.js
+├─ routes/
+│  ├─ index.js              # mounts: router.use('/auth', auth); router.use('/users', users);
+│  ├─ auth.js
+│  ├─ users.js
+│  └─ posts.js
+├─ controllers/
+│  ├─ authController.js
+│  ├─ userController.js
+│  └─ postController.js
+├─ models/
+│  ├─ User.js
+│  ├─ Post.js
+│  └─ index.js              # export models { User, Post }
+├─ middleware/
+│  ├─ auth.js               # verifies JWT + sets req.user
+│  ├─ authorization.js      # role checks
+│  └─ errorHandler.js
+├─ utils/
+│  ├─ jwt.js
+│  └─ constants.js
+├─ tests/                   # future: integration/unit tests
+├─ .env.example
+└─ README.md
+
 ```
 
 Tip: open `controllers/` to see the endpoint logic and `routes/` to see endpoint URLs.
