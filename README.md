@@ -46,7 +46,7 @@ Production:
 npm start
 ```
 
-Visit: http://localhost:5000/health
+Visit: http://localhost:5000/
 
 ---
 
