@@ -1,403 +1,166 @@
-# Social Activity Feed Backend - Inkle Assignment
+# Social Activity Feed Backend — Inkle Assignment
 
-A production-ready Node.js/Express backend for a social activity feed with JWT authentication, role-based access control, and comprehensive activity tracking.
-
----
-
-## 📋 Features
-
-- **User Authentication**: Signup and login with JWT tokens
-- **User Profiles**: Create and manage profiles with roles (User, Admin, Owner)
-- **Posts**: Create, read, update, and delete posts
-- **Likes**: Like and unlike posts with activity tracking
-- **Follow System**: Follow and unfollow users with relationships
-- **Block System**: Block users to hide their posts and activities
-- **Activity Feed**: Real-time activity wall with all user actions
-- **Role-Based Access Control**:
-  - User: Create posts, like, follow, block
-  - Admin: Delete posts, users, and likes
-  - Owner: Everything admins can do + create/delete admins
-- **Activity Logging**: Complete tracking of all actions
-- **Permissions**: Fine-grained access control for all operations
+A concise, developer-friendly README with a clearer folder map and quick-start instructions to reduce the feeling of a congested project layout.
 
 ---
 
-## 🏗️ Project Structure
+## Table of contents
 
-\`\`\`
-.
-├── server.js                    # Main server entry point
-├── config/
-│   └── database.js              # MongoDB connection configuration
-├── models/
-│   ├── User.js                  # User schema with auth methods
-│   ├── Post.js                  # Post schema
-│   ├── Like.js                  # Like schema
-│   ├── Follow.js                # Follow relationship schema
-│   ├── Block.js                 # Block relationship schema
-│   └── Activity.js              # Activity log schema
-├── controllers/
-│   ├── authController.js        # Signup & login logic
-│   ├── userController.js        # User profile management
-│   ├── postController.js        # Post CRUD operations
-│   ├── likeController.js        # Like operations
-│   ├── followController.js      # Follow/unfollow logic
-│   ├── blockController.js       # Block/unblock logic
-│   └── activityController.js    # Activity feed logic
-├── routes/
-│   ├── auth.js                  # Authentication endpoints
-│   ├── users.js                 # User endpoints
-│   ├── posts.js                 # Post endpoints
-│   ├── likes.js                 # Like endpoints
-│   ├── follows.js               # Follow endpoints
-│   ├── blocks.js                # Block endpoints
-│   └── activities.js            # Activity endpoints
-├── middleware/
-│   ├── auth.js                  # JWT authentication
-│   ├── authorization.js         # Role-based authorization
-│   ├── errorHandler.js          # Global error handling
-│   └── validation.js            # Validation result handler
-├── utils/
-│   ├── constants.js             # Constants and error messages
-│   └── validation.js            # Validation schemas
-└── .env.example                 # Environment variables template
-\`\`\`
+- [Quick start](#quick-start)
+- [What this project does](#what-this-project-does)
+- [Minimal folder map](#minimal-folder-map)
+- [Environment](#environment)
+- [Run & test](#run--test)
+- [API highlights](#api-highlights)
+- [Troubleshooting](#troubleshooting)
+- [Notes and next steps](#notes-and-next-steps)
 
 ---
 
-## 🚀 Installation & Setup
+## Quick start
 
-### Step 1: Install Dependencies
+1. Install dependencies
 
-\`\`\`bash
+```powershell
 npm install
-\`\`\`
+```
 
-### Step 2: Create Environment File
+2. Copy environment template and edit `.env`
 
-\`\`\`bash
-cp .env.example .env
-\`\`\`
+```powershell
+copy .env.example .env
+# then open .env and set values (PORT, MONGODB_URI, JWT_SECRET, etc.)
+```
 
-### Step 3: Configure Environment Variables
+3. Start the server
 
-Edit \`.env\` and set:
+Development (auto-reload with nodemon if available):
 
-\`\`\`env
+```powershell
+npm run dev
+```
+
+Production:
+
+```powershell
+npm start
+```
+
+Visit: http://localhost:5000/health
+
+---
+
+## What this project does
+
+This repository implements a backend for a social activity feed. Core features:
+
+- User authentication (signup/login) with JWT
+- Role-based access (User, Admin, Owner)
+- Posts, Likes, Follows, Blocks
+- Activity logging for user actions
+
+The README below focuses on making the code layout and quick testing simple.
+
+---
+
+## Minimal folder map
+
+I removed the deep tree and grouped files so the layout is easier to scan. Open files under each folder for details.
+
+```
+.
+├─ server.js                 # App entry
+├─ config/                   # DB and other config
+├─ controllers/              # Route handlers (auth, user, post, ...)
+├─ routes/                   # Express routes -> controllers
+├─ models/                   # Mongoose models (User, Post, etc.)
+├─ middleware/               # Auth, validation, error handling
+├─ utils/                    # Small helpers & constants
+├─ public/                   # Static assets (if any)
+└─ README.md                 # You are here
+```
+
+Tip: open `controllers/` to see the endpoint logic and `routes/` to see endpoint URLs.
+
+---
+
+## Environment
+
+Copy `.env.example` to `.env` and configure these main values:
+
+```env
 PORT=5000
 MONGODB_URI=mongodb://localhost:27017/social-feed
-JWT_SECRET=your_super_secret_key_change_in_production
+JWT_SECRET=super_secret_key
 JWT_EXPIRE=7d
 NODE_ENV=development
-\`\`\`
+```
 
-### Step 4: Start Server
-
-**Development (with auto-reload):**
-
-\`\`\`bash
-npm run dev
-\`\`\`
-
-**Production:**
-
-\`\`\`bash
-npm start
-\`\`\`
-
-Expected output: \`🚀 Server is running on port 5000\`
+If you use MongoDB Atlas, replace `MONGODB_URI` with the connection string.
 
 ---
 
-## 📊 Database Setup
+## Run & test
 
-MongoDB must be running before starting the server.
+1. Start MongoDB (local) or ensure your `MONGODB_URI` is reachable.
 
-**Local MongoDB:**
+2. Start server (see Quick start).
 
-\`\`\`bash
-mongod
-\`\`\`
+3. Quick smoke test using curl (PowerShell - backticks for line continuation):
 
-**Or use MongoDB Atlas:**
+```powershell
+curl -X POST http://localhost:5000/api/auth/signup `
+  -H "Content-Type: application/json" `
+  -d '{"email":"test@example.com","password":"secret123","username":"testuser"}'
+```
 
-Set MONGODB_URI in .env to your Atlas connection string:
+Expected: HTTP 201 with a JSON payload containing `token` and `user`.
 
-\`\`\`
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/dbname
-\`\`\`
-
----
-
-## 👥 User Roles & Permissions
-
-### Role Hierarchy
-
-\`\`\`
-OWNER (Highest)
-├── Do everything Admin can do
-├── Create new admins
-└── Delete admins
-
-ADMIN
-├── Delete any post
-├── Delete any user
-├── Delete any like
-└── View all activities
-
-USER (Default - Lowest)
-├── Create own posts
-├── Like/unlike posts
-├── Follow/unfollow users
-├── Block/unblock users
-└── Edit own profile
-\`\`\`
-
-### Permission Matrix
-
-| Action | User | Admin | Owner |
-|--------|------|-------|-------|
-| Create Post | ✅ | ✅ | ✅ |
-| Edit Own Post | ✅ | ✅ | ✅ |
-| Delete Own Post | ✅ | ✅ | ✅ |
-| Delete Any Post | ❌ | ✅ | ✅ |
-| Delete Any User | ❌ | ✅ | ✅ |
-| Delete Any Like | ❌ | ✅ | ✅ |
-| Create Admin | ❌ | ❌ | ✅ |
-| Remove Admin | ❌ | ❌ | ✅ |
-| View All Activities | ✅ | ✅ | ✅ |
+Postman: there is a `postman-collection.json` at repo root — import it into Postman and set the environment variable `base_url` to `http://localhost:5000/api`.
 
 ---
 
-## 📝 API Testing with Postman
+## API highlights
 
-### Setup Postman Environment
+The most-used endpoints (see `routes/` for full list):
 
-Create a new environment with these variables:
+- POST /api/auth/signup — create account
+- POST /api/auth/login — login (returns JWT)
+- GET /api/users/profile — get current user (requires Authorization header)
+- POST /api/posts — create a post (Authorization required)
 
-\`\`\`json
-{
-  "base_url": "http://localhost:5000/api",
-  "user_token": "",
-  "admin_token": "",
-  "owner_token": "",
-  "userId": "",
-  "postId": ""
-}
-\`\`\`
-
-Then save tokens from responses to use in other requests.
+Use header: `Authorization: Bearer <token>`
 
 ---
 
-## 🔐 Feature 1: Authentication
+## Troubleshooting
 
-### 1.1 Signup - Create New Account
+- "next is not a function" during signup: restart server after updates. (Fix was applied in the Mongoose pre-save hook.)
+- If you see DB connection errors: ensure `MONGODB_URI` is correct and MongoDB is running.
+- To get verbose errors during development: set `NODE_ENV=development` in `.env`.
 
-**Request:**
-
-\`\`\`
-POST http://localhost:5000/api/auth/signup
-Content-Type: application/json
-
-{
-  "username": "john_doe",
-  "email": "john@example.com",
-  "password": "securePassword123"
-}
-\`\`\`
-
-**Response (201 Created):**
-
-\`\`\`json
-{
-  "success": true,
-  "message": "User registered successfully",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "user": {
-    "_id": "507f1f77bcf86cd799439011",
-    "username": "john_doe",
-    "email": "john@example.com",
-    "role": "user",
-    "createdAt": "2025-01-15T10:30:00Z"
-  }
-}
-\`\`\`
-
-**Postman Steps:**
-
-1. Create new POST request
-2. URL: \`http://localhost:5000/api/auth/signup\`
-3. Headers → Add \`Content-Type: application/json\`
-4. Body → Raw → JSON
-5. Paste request body above
-6. Click Send
-7. Copy token and save to Postman environment as \`user_token\`
-
-**Verify:**
-
-- [ ] Status code is 201
-- [ ] Response has \`success: true\`
-- [ ] JWT token returned
-- [ ] User object contains username and email
+If an error persists, check the server logs — they include stack traces logged by the global error handler.
 
 ---
 
-### 1.2 Login - Authenticate User
+## Notes and next steps
 
-**Request:**
-
-\`\`\`
-POST http://localhost:5000/api/auth/login
-Content-Type: application/json
-
-{
-  "email": "john@example.com",
-  "password": "securePassword123"
-}
-\`\`\`
-
-**Response (200 OK):**
-
-\`\`\`json
-{
-  "success": true,
-  "message": "Login successful",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "user": {
-    "_id": "507f1f77bcf86cd799439011",
-    "username": "john_doe",
-    "email": "john@example.com",
-    "role": "user"
-  }
-}
-\`\`\`
-
-**Verify:**
-
-- [ ] Status code is 200
-- [ ] New JWT token received
-- [ ] Can login with correct credentials
-- [ ] Wrong password returns 401 Unauthorized
+- The folder map in this README intentionally avoids listing every file to keep it readable. Use `ls controllers` or `dir controllers` to inspect contents.
+- Suggested improvements you might want to add:
+  - Add an OpenAPI / Swagger spec for quick integration testing
+  - Add a small integration test that spins up an in-memory MongoDB (mongodb-memory-server) and validates auth flow
+  - Group large UI components (if front-end gets added) into `client/` to avoid mixing with backend code
 
 ---
 
-## 👤 Feature 2: User Management
+If you'd like, I can:
 
-### 2.1 Get Current User Profile
+- Expand the folder map back to a full file tree, but with foldable sections.
+- Add a short quickendpoints.md that lists every route and payloads.
+- Add a PowerShell script to run DB + server (for Windows dev experience).
 
-**Request:**
+Pick one and I'll implement it next.
 
-\`\`\`
-GET http://localhost:5000/api/users/profile
-Authorization: Bearer {{user_token}}
-\`\`\`
-
-**Response (200 OK):**
-
-\`\`\`json
-{
-  "success": true,
-  "user": {
-    "_id": "507f1f77bcf86cd799439011",
-    "username": "john_doe",
-    "email": "john@example.com",
-    "bio": "I love coding",
-    "role": "user",
-    "followers": 5,
-    "following": 3
-  }
-}
-\`\`\`
-
-**Verify:**
-
-- [ ] Status code is 200
-- [ ] Returns current user data
-- [ ] Without token returns 401 Unauthorized
-
----
-
-### 2.2 Update User Profile
-
-**Request:**
-
-\`\`\`
-PUT http://localhost:5000/api/users/profile
-Authorization: Bearer {{user_token}}
-Content-Type: application/json
-
-{
-  "username": "john_doe_updated",
-  "bio": "I love coding and designing"
-}
-\`\`\`
-
-**Response (200 OK):**
-
-\`\`\`json
-{
-  "success": true,
-  "message": "Profile updated successfully",
-  "user": {
-    "_id": "507f1f77bcf86cd799439011",
-    "username": "john_doe_updated",
-    "bio": "I love coding and designing"
-  }
-}
-\`\`\`
-
-**Verify:**
-
-- [ ] Status code is 200
-- [ ] Username updated
-- [ ] Bio updated
-
----
-
-### 2.3 Get User by ID
-
-**Request:**
-
-\`\`\`
-GET http://localhost:5000/api/users/507f1f77bcf86cd799439011
-Authorization: Bearer {{user_token}}
-\`\`\`
-
-**Response (200 OK):**
-
-\`\`\`json
-{
-  "success": true,
-  "user": {
-    "_id": "507f1f77bcf86cd799439011",
-    "username": "john_doe",
-    "bio": "I love coding",
-    "followers": 5,
-    "following": 3
-  }
-}
-\`\`\`
-
----
-
-## 📮 Feature 3: Posts
-
-### 3.1 Create Post
-
-**Request:**
-
-\`\`\`
-POST http://localhost:5000/api/posts
-Authorization: Bearer {{user_token}}
-Content-Type: application/json
-
-{
-  "content": "Just finished building an amazing social feed app!"
-}
-\`\`\`
-
-**Response (201 Created):**
 
 \`\`\`json
 {
