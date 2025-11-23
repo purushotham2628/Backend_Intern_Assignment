@@ -6,7 +6,7 @@ const generateToken = (userId, role) => {
   return jwt.sign({ userId, role }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE || "7d" })
 }
 
-export const signup = async (req, res) => {
+export const signup = async (req, res, next) => {
   try {
     const { email, password, username } = req.body
 
@@ -42,10 +42,11 @@ export const signup = async (req, res) => {
       message: ERROR_MESSAGES.INTERNAL_ERROR,
       error: error.message,
     })
+    // Optionally use: next(error);
   }
 }
 
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body
 
@@ -81,5 +82,6 @@ export const login = async (req, res) => {
       message: ERROR_MESSAGES.INTERNAL_ERROR,
       error: error.message,
     })
+    // Optionally use: next(error);
   }
 }
