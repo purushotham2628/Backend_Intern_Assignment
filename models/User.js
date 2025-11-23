@@ -48,8 +48,8 @@ const userSchema = new mongoose.Schema({
   },
 })
 
-// Hash password before saving
 userSchema.pre("save", async function (next) {
+  // Skip if password is not modified
   if (!this.isModified("password")) {
     return next()
   }
@@ -59,6 +59,7 @@ userSchema.pre("save", async function (next) {
     this.password = await bcryptjs.hash(this.password, salt)
     next()
   } catch (error) {
+    // Pass error to next middleware
     next(error)
   }
 })
