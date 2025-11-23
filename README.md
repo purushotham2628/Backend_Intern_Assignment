@@ -2,6 +2,8 @@
 
 A comprehensive backend system for a social activity feed with proper permissions, roles, and activity tracking using Node.js, Express.js, MongoDB, and JWT authentication.
 
+---
+
 ## 📋 Features
 
 - **User Authentication**: Signup, Login with JWT tokens
@@ -17,6 +19,8 @@ A comprehensive backend system for a social activity feed with proper permission
   - **Owner**: Can do everything admins can + create/delete admins
 - **Activity Logging**: Comprehensive tracking of all user actions
 - **Permissions**: Fine-grained permission system for all operations
+
+---
 
 ## 🏗️ Project Structure
 
@@ -57,6 +61,8 @@ A comprehensive backend system for a social activity feed with proper permission
 └── .env.example             # Environment variables template
 \`\`\`
 
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -67,23 +73,27 @@ A comprehensive backend system for a social activity feed with proper permission
 ### Installation
 
 1. **Clone the repository**
+
 \`\`\`bash
 git clone <repository-url>
 cd social-activity-feed-backend
 \`\`\`
 
 2. **Install dependencies**
+
 \`\`\`bash
 npm install
 \`\`\`
 
 3. **Configure environment variables**
+
 \`\`\`bash
 cp .env.example .env
 # Edit .env and update the values
 \`\`\`
 
 4. **Start the server**
+
 \`\`\`bash
 # Development
 npm run dev
@@ -92,50 +102,54 @@ npm run dev
 npm start
 \`\`\`
 
-The server will run on `http://localhost:5000`
+The server will run on \`http://localhost:5000\`
+
+---
 
 ## 📚 API Endpoints Overview
 
 ### Authentication Routes
-- `POST /api/auth/signup` - Register a new user
-- `POST /api/auth/login` - Login user
+- \`POST /api/auth/signup\` - Register a new user
+- \`POST /api/auth/login\` - Login user
 
 ### User Routes
-- `GET /api/users` - Get all users
-- `GET /api/users/:id` - Get user by ID
-- `PUT /api/users/:id` - Update user profile
-- `DELETE /api/users/:id` - Delete user (Admin/Owner)
-- `GET /api/users/:id/followers` - Get user followers
-- `GET /api/users/:id/following` - Get user following list
-- `POST /api/users/admin/make` - Make user admin (Owner only)
-- `POST /api/users/admin/remove` - Remove admin privileges (Owner only)
+- \`GET /api/users\` - Get all users
+- \`GET /api/users/:id\` - Get user by ID
+- \`PUT /api/users/:id\` - Update user profile
+- \`DELETE /api/users/:id\` - Delete user (Admin/Owner)
+- \`GET /api/users/:id/followers\` - Get user followers
+- \`GET /api/users/:id/following\` - Get user following list
+- \`POST /api/users/admin/make\` - Make user admin (Owner only)
+- \`POST /api/users/admin/remove\` - Remove admin privileges (Owner only)
 
 ### Post Routes
-- `POST /api/posts` - Create new post
-- `GET /api/posts` - Get all posts (paginated)
-- `GET /api/posts/:id` - Get post by ID
-- `PUT /api/posts/:id` - Update post (Owner only)
-- `DELETE /api/posts/:id` - Delete post (Owner/Admin)
+- \`POST /api/posts\` - Create new post
+- \`GET /api/posts\` - Get all posts (paginated)
+- \`GET /api/posts/:id\` - Get post by ID
+- \`PUT /api/posts/:id\` - Update post (Owner only)
+- \`DELETE /api/posts/:id\` - Delete post (Owner/Admin)
 
 ### Like Routes
-- `POST /api/likes` - Like a post
-- `DELETE /api/likes/:postId` - Unlike a post
-- `GET /api/likes/:postId` - Get likes on a post
-- `DELETE /api/likes/admin/:likeId` - Delete like (Admin only)
+- \`POST /api/likes\` - Like a post
+- \`DELETE /api/likes/:postId\` - Unlike a post
+- \`GET /api/likes/:postId\` - Get likes on a post
+- \`DELETE /api/likes/admin/:likeId\` - Delete like (Admin only)
 
 ### Follow Routes
-- `POST /api/follows` - Follow a user
-- `DELETE /api/follows/:followingId` - Unfollow a user
-- `GET /api/follows/status/:userId` - Check follow status
+- \`POST /api/follows\` - Follow a user
+- \`DELETE /api/follows/:followingId\` - Unfollow a user
+- \`GET /api/follows/status/:userId\` - Check follow status
 
 ### Block Routes
-- `POST /api/blocks` - Block a user
-- `DELETE /api/blocks/:blockedId` - Unblock a user
-- `GET /api/blocks` - Get blocked users list
+- \`POST /api/blocks\` - Block a user
+- \`DELETE /api/blocks/:blockedId\` - Unblock a user
+- \`GET /api/blocks\` - Get blocked users list
 
 ### Activity Routes
-- `GET /api/activities` - Get activity feed (paginated)
-- `GET /api/activities/user/:userId` - Get user-specific activities
+- \`GET /api/activities\` - Get activity feed (paginated)
+- \`GET /api/activities/user/:userId\` - Get user-specific activities
+
+---
 
 ## 🔐 Authentication
 
@@ -145,9 +159,12 @@ All protected endpoints require a JWT token in the Authorization header:
 Authorization: Bearer <your_jwt_token>
 \`\`\`
 
+---
+
 ## 🛡️ Roles & Permissions
 
 ### User Roles
+
 1. **User** (default)
    - Create own posts
    - Like/unlike posts
@@ -166,6 +183,8 @@ Authorization: Bearer <your_jwt_token>
    - All Admin permissions
    - Create/delete other admins
    - Full system control
+
+---
 
 ## 📊 Data Models
 
@@ -216,18 +235,19 @@ Authorization: Bearer <your_jwt_token>
 
 ### Setup Instructions
 
-1. **Import Collection**: Open Postman → Click Import → Select `postman-collection.json`
+1. **Import Collection**: Open Postman → Click Import → Select \`postman-collection.json\`
 2. **Set Environment Variables**:
    - After login, copy the JWT token from response
-   - Create environment variable `token` with the JWT token value
-   - Use `{{token}}` in Authorization headers for authenticated requests
+   - Create environment variable \`token\` with the JWT token value
+   - Use \`{{token}}\` in Authorization headers for authenticated requests
 
 ---
 
 ### 1. Authentication Endpoints
 
 #### 1.1 Signup
-**Endpoint**: `POST http://localhost:5000/api/auth/signup`
+
+**Endpoint**: \`POST http://localhost:5000/api/auth/signup\`
 
 **Request Body**:
 \`\`\`json
@@ -268,7 +288,8 @@ Authorization: Bearer <your_jwt_token>
 ---
 
 #### 1.2 Login
-**Endpoint**: `POST http://localhost:5000/api/auth/login`
+
+**Endpoint**: \`POST http://localhost:5000/api/auth/login\`
 
 **Request Body**:
 \`\`\`json
@@ -309,7 +330,8 @@ Authorization: Bearer <your_jwt_token>
 ### 2. User Management Endpoints
 
 #### 2.1 Get All Users
-**Endpoint**: `GET http://localhost:5000/api/users`
+
+**Endpoint**: \`GET http://localhost:5000/api/users\`
 
 **Headers**:
 \`\`\`
@@ -356,7 +378,8 @@ Authorization: Bearer {{token}}
 ---
 
 #### 2.2 Get User by ID
-**Endpoint**: `GET http://localhost:5000/api/users/:id`
+
+**Endpoint**: \`GET http://localhost:5000/api/users/:id\`
 
 **Headers**:
 \`\`\`
@@ -389,7 +412,8 @@ Authorization: Bearer {{token}}
 ---
 
 #### 2.3 Update User Profile
-**Endpoint**: `PUT http://localhost:5000/api/users/:id`
+
+**Endpoint**: \`PUT http://localhost:5000/api/users/:id\`
 
 **Headers**:
 \`\`\`
@@ -432,7 +456,8 @@ Authorization: Bearer {{token}}
 ---
 
 #### 2.4 Delete User (Admin/Owner)
-**Endpoint**: `DELETE http://localhost:5000/api/users/:id`
+
+**Endpoint**: \`DELETE http://localhost:5000/api/users/:id\`
 
 **Headers**:
 \`\`\`
@@ -459,7 +484,8 @@ Authorization: Bearer {{token}}  (Admin or Owner token)
 ### 3. Post Management Endpoints
 
 #### 3.1 Create Post
-**Endpoint**: `POST http://localhost:5000/api/posts`
+
+**Endpoint**: \`POST http://localhost:5000/api/posts\`
 
 **Headers**:
 \`\`\`
@@ -505,7 +531,8 @@ Content-Type: application/json
 ---
 
 #### 3.2 Get All Posts
-**Endpoint**: `GET http://localhost:5000/api/posts`
+
+**Endpoint**: \`GET http://localhost:5000/api/posts\`
 
 **Headers**:
 \`\`\`
@@ -544,7 +571,7 @@ Authorization: Bearer {{token}}
 
 **Verification Steps**:
 - [ ] Get all posts → 200 status
-- [ ] Verify pagination works: `?page=1&limit=5`
+- [ ] Verify pagination works: \`?page=1&limit=5\`
 - [ ] Verify posts from blocked users not shown
 - [ ] Posts ordered by newest first
 - [ ] Without token → 401 Unauthorized
@@ -552,7 +579,8 @@ Authorization: Bearer {{token}}
 ---
 
 #### 3.3 Get Post by ID
-**Endpoint**: `GET http://localhost:5000/api/posts/:id`
+
+**Endpoint**: \`GET http://localhost:5000/api/posts/:id\`
 
 **Headers**:
 \`\`\`
@@ -587,7 +615,8 @@ Authorization: Bearer {{token}}
 ---
 
 #### 3.4 Update Post
-**Endpoint**: `PUT http://localhost:5000/api/posts/:id`
+
+**Endpoint**: \`PUT http://localhost:5000/api/posts/:id\`
 
 **Headers**:
 \`\`\`
@@ -624,7 +653,8 @@ Authorization: Bearer {{token}}
 ---
 
 #### 3.5 Delete Post (Owner/Admin)
-**Endpoint**: `DELETE http://localhost:5000/api/posts/:id`
+
+**Endpoint**: \`DELETE http://localhost:5000/api/posts/:id\`
 
 **Headers**:
 \`\`\`
@@ -652,7 +682,8 @@ Authorization: Bearer {{token}}
 ### 4. Like System Endpoints
 
 #### 4.1 Like a Post
-**Endpoint**: `POST http://localhost:5000/api/likes`
+
+**Endpoint**: \`POST http://localhost:5000/api/likes\`
 
 **Headers**:
 \`\`\`
@@ -694,7 +725,8 @@ Authorization: Bearer {{token}}
 ---
 
 #### 4.2 Unlike a Post
-**Endpoint**: `DELETE http://localhost:5000/api/likes/:postId`
+
+**Endpoint**: \`DELETE http://localhost:5000/api/likes/:postId\`
 
 **Headers**:
 \`\`\`
@@ -718,7 +750,8 @@ Authorization: Bearer {{token}}
 ---
 
 #### 4.3 Get Likes on a Post
-**Endpoint**: `GET http://localhost:5000/api/likes/:postId`
+
+**Endpoint**: \`GET http://localhost:5000/api/likes/:postId\`
 
 **Headers**:
 \`\`\`
@@ -754,7 +787,8 @@ Authorization: Bearer {{token}}
 ---
 
 #### 4.4 Delete Like (Admin Only)
-**Endpoint**: `DELETE http://localhost:5000/api/likes/admin/:likeId`
+
+**Endpoint**: \`DELETE http://localhost:5000/api/likes/admin/:likeId\`
 
 **Headers**:
 \`\`\`
@@ -780,7 +814,8 @@ Authorization: Bearer {{token}}  (Admin token)
 ### 5. Follow System Endpoints
 
 #### 5.1 Follow User
-**Endpoint**: `POST http://localhost:5000/api/follows`
+
+**Endpoint**: \`POST http://localhost:5000/api/follows\`
 
 **Headers**:
 \`\`\`
@@ -826,7 +861,8 @@ Authorization: Bearer {{token}}
 ---
 
 #### 5.2 Unfollow User
-**Endpoint**: `DELETE http://localhost:5000/api/follows/:followingId`
+
+**Endpoint**: \`DELETE http://localhost:5000/api/follows/:followingId\`
 
 **Headers**:
 \`\`\`
@@ -850,7 +886,8 @@ Authorization: Bearer {{token}}
 ---
 
 #### 5.3 Check Follow Status
-**Endpoint**: `GET http://localhost:5000/api/follows/status/:userId`
+
+**Endpoint**: \`GET http://localhost:5000/api/follows/status/:userId\`
 
 **Headers**:
 \`\`\`
@@ -866,83 +903,17 @@ Authorization: Bearer {{token}}
 \`\`\`
 
 **Verification Steps**:
-- [ ] Check status for user you follow → `isFollowing: true`
-- [ ] Check status for user you don't follow → `isFollowing: false`
+- [ ] Check status for user you follow → \`isFollowing: true\`
+- [ ] Check status for user you don't follow → \`isFollowing: false\`
 - [ ] Try non-existent user → 404
-
----
-
-#### 5.4 Get User Followers
-**Endpoint**: `GET http://localhost:5000/api/users/:id/followers`
-
-**Headers**:
-\`\`\`
-Authorization: Bearer {{token}}
-\`\`\`
-
-**Expected Response** (Status: 200):
-\`\`\`json
-{
-  "success": true,
-  "data": [
-    {
-      "_id": "65a1234567890abcdef77777",
-      "follower": {
-        "_id": "65a1234567890abcdef12345",
-        "username": "john_doe",
-        "email": "john@example.com",
-        "profile": { "bio": "Software developer" }
-      },
-      "following": "65a1234567890abcdef67890",
-      "createdAt": "2024-01-15T11:30:00Z"
-    }
-  ]
-}
-\`\`\`
-
-**Verification Steps**:
-- [ ] Get followers of any user → 200, array
-- [ ] User with no followers → 200, empty array
-- [ ] Verify user details included
-
----
-
-#### 5.5 Get User Following List
-**Endpoint**: `GET http://localhost:5000/api/users/:id/following`
-
-**Headers**:
-\`\`\`
-Authorization: Bearer {{token}}
-\`\`\`
-
-**Expected Response** (Status: 200):
-\`\`\`json
-{
-  "success": true,
-  "data": [
-    {
-      "_id": "65a1234567890abcdef77777",
-      "follower": "65a1234567890abcdef67890",
-      "following": {
-        "_id": "65a1234567890abcdef12345",
-        "username": "john_doe",
-        "email": "john@example.com"
-      }
-    }
-  ]
-}
-\`\`\`
-
-**Verification Steps**:
-- [ ] Get following list → 200, array
-- [ ] User following nobody → 200, empty array
 
 ---
 
 ### 6. Block System Endpoints
 
 #### 6.1 Block User
-**Endpoint**: `POST http://localhost:5000/api/blocks`
+
+**Endpoint**: \`POST http://localhost:5000/api/blocks\`
 
 **Headers**:
 \`\`\`
@@ -986,7 +957,8 @@ Authorization: Bearer {{token}}
 ---
 
 #### 6.2 Unblock User
-**Endpoint**: `DELETE http://localhost:5000/api/blocks/:blockedId`
+
+**Endpoint**: \`DELETE http://localhost:5000/api/blocks/:blockedId\`
 
 **Headers**:
 \`\`\`
@@ -1009,7 +981,8 @@ Authorization: Bearer {{token}}
 ---
 
 #### 6.3 Get Blocked Users
-**Endpoint**: `GET http://localhost:5000/api/blocks`
+
+**Endpoint**: \`GET http://localhost:5000/api/blocks\`
 
 **Headers**:
 \`\`\`
@@ -1044,7 +1017,8 @@ Authorization: Bearer {{token}}
 ### 7. Activity Feed Endpoints
 
 #### 7.1 Get Activity Feed
-**Endpoint**: `GET http://localhost:5000/api/activities`
+
+**Endpoint**: \`GET http://localhost:5000/api/activities\`
 
 **Headers**:
 \`\`\`
@@ -1097,7 +1071,7 @@ Authorization: Bearer {{token}}
 
 **Verification Steps**:
 - [ ] Get activity feed → 200 status
-- [ ] Pagination works: `?page=1&limit=10`, `?page=2&limit=10`
+- [ ] Pagination works: \`?page=1&limit=10\`, \`?page=2&limit=10\`
 - [ ] Activities from blocked users NOT shown
 - [ ] Activities ordered by newest first
 - [ ] Without token → 401 Unauthorized
@@ -1105,7 +1079,8 @@ Authorization: Bearer {{token}}
 ---
 
 #### 7.2 Get User-Specific Activities
-**Endpoint**: `GET http://localhost:5000/api/activities/user/:userId`
+
+**Endpoint**: \`GET http://localhost:5000/api/activities/user/:userId\`
 
 **Headers**:
 \`\`\`
@@ -1148,181 +1123,147 @@ Authorization: Bearer {{token}}
 - [ ] Get specific user's activities → 200 status
 - [ ] All activities are from specified user
 - [ ] Pagination works
-- [ ] Try non-existent user → 404
 
 ---
 
-### 8. Admin Role-Based Testing
+## 🔗 Complete Workflow Test
 
-#### 8.1 Make User Admin (Owner Only)
-**Endpoint**: `POST http://localhost:5000/api/users/admin/make`
+### Scenario: Two users interact on the platform
 
-**Headers**:
+**Step 1**: Sign up User 1 (john_doe)
 \`\`\`
-Authorization: Bearer {{token}}  (Owner token)
-\`\`\`
-
-**Request Body**:
-\`\`\`json
-{
-  "userId": "65a1234567890abcdef67890"
-}
+POST /api/auth/signup
+Body: { "username": "john_doe", "email": "john@example.com", "password": "pass123" }
+Result: Save token as USER1_TOKEN
 \`\`\`
 
-**Expected Response** (Status: 200):
-\`\`\`json
-{
-  "success": true,
-  "message": "User promoted to admin",
-  "data": {
-    "_id": "65a1234567890abcdef67890",
-    "username": "jane_smith",
-    "email": "jane@example.com",
-    "role": "Admin",
-    "profile": { "bio": "" }
-  }
-}
+**Step 2**: Sign up User 2 (jane_smith)
+\`\`\`
+POST /api/auth/signup
+Body: { "username": "jane_smith", "email": "jane@example.com", "password": "pass123" }
+Result: Save token as USER2_TOKEN
 \`\`\`
 
-**Verification Steps**:
-- [ ] As Owner: promote user to Admin → 200 status
-- [ ] As regular User: try to make admin → 403 Forbidden
-- [ ] Verify user role changed to "Admin"
-- [ ] User can now delete posts/users
-
----
-
-#### 8.2 Remove Admin Privileges (Owner Only)
-**Endpoint**: `POST http://localhost:5000/api/users/admin/remove`
-
-**Headers**:
-\`\`\`
-Authorization: Bearer {{token}}  (Owner token)
-\`\`\`
-
-**Request Body**:
-\`\`\`json
-{
-  "userId": "65a1234567890abcdef67890"
-}
-\`\`\`
-
-**Expected Response** (Status: 200):
-\`\`\`json
-{
-  "success": true,
-  "message": "Admin privileges removed",
-  "data": {
-    "_id": "65a1234567890abcdef67890",
-    "username": "jane_smith",
-    "role": "User"
-  }
-}
-\`\`\`
-
-**Verification Steps**:
-- [ ] As Owner: demote admin → 200 status
-- [ ] User role changed back to "User"
-- [ ] User cannot delete others' posts anymore
-
----
-
-### 9. Complete End-to-End Test Workflow
-
-Follow this workflow to test the entire system:
-
-**Step 1: Create 3 Users**
-\`\`\`
-POST /api/auth/signup (john_doe)
-POST /api/auth/signup (jane_smith) 
-POST /api/auth/signup (admin_user)
-\`\`\`
-
-**Step 2: Promote admin_user to Admin** (use john_doe as owner)
-\`\`\`
-POST /api/users/admin/make
-Body: { "userId": "admin_user_id" }
-\`\`\`
-
-**Step 3: john_doe creates a post**
+**Step 3**: User 1 creates a post
 \`\`\`
 POST /api/posts
-Body: { "content": "My first post!" }
+Headers: Authorization: Bearer USER1_TOKEN
+Body: { "content": "Hello world! This is my first post." }
+Result: Save post ID as POST1_ID
+Verify: Activity shows "john_doe made a post"
 \`\`\`
 
-**Step 4: jane_smith likes the post**
-\`\`\`
-POST /api/likes
-Body: { "postId": "post_id" }
-\`\`\`
-
-**Step 5: jane_smith follows john_doe**
+**Step 4**: User 2 follows User 1
 \`\`\`
 POST /api/follows
-Body: { "followingId": "john_doe_id" }
+Headers: Authorization: Bearer USER2_TOKEN
+Body: { "followingId": "USER1_ID" }
+Verify: Activity shows "jane_smith followed john_doe"
 \`\`\`
 
-**Step 6: Check activity feed**
+**Step 5**: User 2 likes User 1's post
+\`\`\`
+POST /api/likes
+Headers: Authorization: Bearer USER2_TOKEN
+Body: { "postId": POST1_ID }
+Verify: Activity shows "jane_smith liked john_doe's post"
+\`\`\`
+
+**Step 6**: View activity feed
 \`\`\`
 GET /api/activities
-Verify activities: created_post, liked_post, followed_user
-\`\`\`
-
-**Step 7: john_doe blocks admin_user**
-\`\`\`
-POST /api/blocks
-Body: { "blockedId": "admin_user_id" }
-\`\`\`
-
-**Step 8: Verify blocked user activities don't appear**
-\`\`\`
-GET /api/posts - admin_user's posts should not appear
-GET /api/activities - admin_user's activities should not appear
-\`\`\`
-
-**Step 9: Test Admin permissions**
-\`\`\`
-As admin_user: DELETE /api/posts/:post_id → should succeed
-As admin_user: DELETE /api/users/:user_id → should succeed
-As jane_smith: DELETE /api/posts/:post_id → 403 Forbidden
-\`\`\`
-
-**Step 10: Verify all activity types logged**
-\`\`\`
-GET /api/activities
-Should contain: created_post, liked_post, followed_user, blocked_user, etc.
+Headers: Authorization: Bearer USER1_TOKEN
+Verify: All three activities appear in chronological order
 \`\`\`
 
 ---
 
-## 📝 Common Error Responses
+## ⚠️ Error Responses
 
-| Status | Message | Meaning |
+All errors follow this format:
+
+\`\`\`json
+{
+  "success": false,
+  "message": "Error description",
+  "errors": [
+    {
+      "msg": "Specific error message",
+      "param": "field_name"
+    }
+  ]
+}
+\`\`\`
+
+### Common HTTP Status Codes
+
+| Status | Meaning | Example |
 |--------|---------|---------|
-| 400 | "Validation error" | Invalid request body |
-| 401 | "Unauthorized" | Missing or invalid token |
-| 403 | "Forbidden" | No permission for this action |
-| 404 | "Not found" | Resource doesn't exist |
-| 500 | "Internal server error" | Server error |
+| 200 | Success | GET request completed |
+| 201 | Created | Resource created successfully |
+| 400 | Bad Request | Invalid input or validation error |
+| 401 | Unauthorized | Missing or invalid token |
+| 403 | Forbidden | Insufficient permissions |
+| 404 | Not Found | Resource does not exist |
+| 500 | Server Error | Internal server error |
 
 ---
 
 ## 🐛 Troubleshooting
 
-**Q: Getting 401 Unauthorized**
-- A: Make sure you have Authorization header with Bearer token
+### Issue: "next is not a function" Error
 
-**Q: Getting 403 Forbidden when trying to delete post**
-- A: Only post owner or Admin/Owner can delete. Use correct token.
+**Solution**: This error was fixed in \`utils/validation.js\` line 28. The \`validate\` middleware now properly returns \`next()\` call.
 
-**Q: Posts from blocked users still appearing**
-- A: Blocked users' posts are excluded in GET /api/posts. Check block list with GET /api/blocks
+\`\`\`javascript
+// Fixed version
+export const validate = (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({...})
+  }
+  return next()  // ← Fixed: added 'return' before next()
+}
+\`\`\`
 
-**Q: Activities not appearing after actions**
-- A: Activities are created for all actions. Check pagination with ?page=1&limit=20
+### Issue: MongoDB Connection Failed
+
+**Solution**: Ensure your \`.env\` file has correct \`MONGODB_URI\`:
+
+\`\`\`env
+MONGODB_URI=mongodb://localhost:27017/social-feed
+# OR for MongoDB Atlas:
+# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/social-feed
+\`\`\`
+
+### Issue: Token Expired
+
+**Solution**: Login again to get a fresh token. Tokens expire after 7 days by default.
+
+### Issue: 401 Unauthorized
+
+**Solution**: Make sure to include the Authorization header:
+
+\`\`\`
+Authorization: Bearer <your_jwt_token>
+\`\`\`
+
+### Issue: Cannot Like Post or Follow User
+
+**Solution**: Check if you've already performed the action. Duplicate actions return 400 errors.
 
 ---
 
-## 📄 License
+## 📝 Notes
 
-This project is open source and available under the MIT License.
+- All timestamps are in UTC (ISO 8601 format)
+- Passwords are hashed with bcryptjs before storage
+- JWT tokens expire after 7 days by default
+- Use HTTPS in production
+- Keep \`JWT_SECRET\` secure and change in production
+
+---
+
+## 📞 Support
+
+For issues or questions, please review the troubleshooting section above or check your MongoDB and environment variable configurations.
